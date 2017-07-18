@@ -1,6 +1,7 @@
 # Why is gitignore not catching these?
 *.xml
 *.iml
+.idea￥workspace.xml
 
 # Ignore my scratch file
 dasdsa.py
