@@ -29,23 +29,28 @@ col = Collection(cpath, log=True)   # Entry point to the API
 #     front = note.fields[1]
 #     print(front)
 
-name_of_deck = r'A_Misc::MyNotes'
-
+name_of_deck = '全集Deck::JpcorePLUS'    # did:1406297528924(JPCoreplus)
+name_of_model = 'Japanese-1b811 example_sentences'
 
 # did = mw.col.decks.byName("name")["id"] gets the ID only since
 # did = mw.col.decks.byName("name") would return a dictionary
 # you only need the ID which you would use for selection
 did = col.decks.byName(name_of_deck)['id']
 
-name_of_deck = col.decks.name(did)
-pprint(col.decks.byName(name_of_deck))
+# notes = col.findNotes()
 
-# mid = col.decks.byName(name_of_deck)['mid']     # get model ID
-# print(mid)
+# nid = col.findCards('did:' + str(did))
+# notes = col.get
+# cards = col.findCards('')
 
-# notes = col.findNotes('mid:' + str(mid))
-# print(len(notes))
-# print(col.decks.name(did))
+# sample = col.findCards('tag:CORE')
+# print(sample)
+
+mid = col.decks.byName(name_of_deck)['mid']     # get model ID
+
+nid = col.findNotes('mid:' + str(mid))
+
+# print(notes)
 
 # ============== NOTE ==============
 # This was a mistake, you can't find notes based on did
