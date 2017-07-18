@@ -19,9 +19,6 @@ cpath = os.path.join(PROFILE_HOME, 'collection.anki2')
 # Load the Collection
 col = Collection(cpath, log=True)   # Entry point to the API
 
-# print(os.path.exists(cpath))
-# print(os.path.isfile(cpath))
-
 # Use the available methods to list the notes
 # for cid in col.findNotes('tag:Basic-Grammar Tae-Kim-Grammar-Guide comprehension'):   # [3] filter cards
 #     note = col.getNote(cid)
@@ -30,27 +27,61 @@ col = Collection(cpath, log=True)   # Entry point to the API
 #     print(front)
 
 name_of_deck = '全集Deck::JpcorePLUS'    # did:1406297528924(JPCoreplus)
-name_of_model = 'Japanese-1b811 example_sentences'
+name_of_model = 'Japanese-1b811 example_sentences'      # Note Type
+field_to_match = 'Expression_Original_Unedited'
 
 # did = mw.col.decks.byName("name")["id"] gets the ID only since
 # did = mw.col.decks.byName("name") would return a dictionary
 # you only need the ID which you would use for selection
 did = col.decks.byName(name_of_deck)['id']
+# print(col.decks.byName(name_of_deck))
+updated_name = col.decks.name(did)
+print(updated_name)
 
-# notes = col.findNotes()
+mid = col.models.byName(name_of_model)['id']        # get model ID
 
-# nid = col.findCards('did:' + str(did))
-# notes = col.get
-# cards = col.findCards('')
+nids = col.findNotes('mid:' + str(mid))
+# print(len(nids))
+first_note_id = nids[1]
+first_note = col.getNote(first_note_id)
+# pprint(first_note.keys())
 
-# sample = col.findCards('tag:CORE')
-# print(sample)
+fields_to_match = []
+def reschedule():
+    for note_id in nids:
+        note = col.getNote(note_id)
+        # print(note[field_to_match])
+        fields_to_match.append(note[field_to_match])
+        # cid = col.getCards('nid:' + str(note_id))
 
-mid = col.decks.byName(name_of_deck)['mid']     # get model ID
+        # There is no 'findCard' feature when going from notes
+        # Because we are not always sure that for every note would be
+        # One card
 
-nid = col.findNotes('mid:' + str(mid))
+        # That is why findCards returns a list
+        # Simply pick the first element of that list, simple
+        cid = col.findCards('nid:' + str(note_id))
+        first_card_id = cid[0]
 
-# print(notes)
+        card = col.getCard(first_card_id)
+        card.due = 0
+        print(card.due)
+        # print(cid)
+        # print(type(cid))
+        # col.sched.newDue()
+        break
+
+reschedule()
+
+list_of_mined_words = []
+def match_txt_cards():
+    for line in list_of_mined_words:
+        if line in fields_to_match:
+            pass
+            # set the due value of that note to ZERO
+
+    # print(note_id)
+# for cid in col.findCards(nid)
 
 # ============== NOTE ==============
 # This was a mistake, you can't find notes based on did
@@ -58,10 +89,6 @@ nid = col.findNotes('mid:' + str(mid))
 # notes = col.findNotes('did:' + str(did))
 # ============== NOTE ==============
 
-# print(notes)
-# deck = col.decks.get(did)
-# print(deck.items())
-# pprint(dir(deck))
 
 # These are the methods for deck
 # ['clear',
