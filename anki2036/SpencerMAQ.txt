@@ -1,0 +1,5 @@
+This is a cloned version of Anki 2.0.36 (The version I'm currently using)
+
+https://github.com/dae/anki/commit/499b02281b4ab2bea3c4167128f02cc3d9cf973b
+
+https://github.com/dae/anki/tree/499b02281b4ab2bea3c4167128f02cc3d9cf973b
