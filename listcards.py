@@ -5,6 +5,13 @@ from anki.storage import Collection
 
 # NOTE: This project is not yet set-up to use the VIRTUALENV
 
+# =========================================
+
+# Trying Pycharm VCS Here
+
+# Commit No. 1
+
+# =========================================
 # Load Anki library
 # https://www.youtube.com/watch?v=vR_6mkQ23sM
 # what this does is it adds ~/anki (folder) to where python searches for modules,
