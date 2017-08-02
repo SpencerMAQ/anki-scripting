@@ -73,6 +73,9 @@ def reschedule():
 
 reschedule()
 
+# Trying PyCharm VCS hehe
+
+
 list_of_mined_words = []
 def match_txt_cards():
     for line in list_of_mined_words:
